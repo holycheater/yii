@@ -1192,7 +1192,7 @@ abstract class CActiveRecord extends CModel
 				if(property_exists($this,$name))
 					$this->$name=$record->$name;
 				else
-					$this->_attributes[$name]=$record->$name;
+					$this->_attributes[$name]=$record->_attributes[$name];
 			}
 			return true;
 		}
