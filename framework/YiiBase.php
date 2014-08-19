@@ -429,10 +429,15 @@ class YiiBase
 			else  // class name with namespace in PHP 5.3
 			{
 				$namespace=str_replace('\\','.',ltrim($className,'\\'));
-				if(($path=self::getPathOfAlias($namespace))!==false)
-					include($path.'.php');
-				else
+				if (($path=self::getPathOfAlias($namespace))!==false) {
+					if (is_file($path . '.php')) {
+						include($path.'.php');
+					} else {
+						return false;
+					}
+				} else {
 					return false;
+				}
 			}
 			return class_exists($className,false) || interface_exists($className,false);
 		}
